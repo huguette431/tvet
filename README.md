@@ -1,60 +1,94 @@
-1. Identify and list the functional requirements of the system.
-  -Register students.
-  -Add new courses.
- -Enroll students in courses.
--  View all students.
-  -View all courses.
-  -View enrollments (which student is enrolled in which course).
+Student Course Registration System
+Project Documentation
 
-2. Identify at least 3 non-functional requirements (e.g., security, performance, scalability)
--Security: Protect student data (e.g., passwords if login is added, avoid SQL injection).
--Performance: Quick response when fetching students or courses.
--Scalability: Able to handle growing number of students and courses.
+1. Project Description
+This project is a simple backend system made using Node.js, Express, and MySQL.
+The main goal of this project is to manage students, courses, and enrollments.
+With this system:
+A student can be added
+A course can be added
+A student can be enrolled in a course
+All data can be viewed from the database
+This project helps me understand how backend servers work and how they connect to a database.
+
+3. Tools and Technologies Used
+Node.js
+Express.js
+MySQL
+MySQL2 package
+JSON format for sending data
+
+5. Project Files Explanation
+3.1 package.json
+This file manages the project settings and dependencies.
+It includes:
+Project name and version
+The start script to run the server
+Dependencies like express and mysql2
+This file helps npm know what packages the project needs.
+3.2 package-lock.json
+This file is automatically created by npm.
+It keeps the exact versions of all installed packages.
+It helps make sure the project runs the same way on different computers.
+3.3 dbconnect.js
+This file is used to connect the project to the MySQL database.
+Inside this file:
+Express is imported
+MySQL connection is created
+Database name is studentcoursers
+If the connection works, a message is shown
+This file makes sure the database is ready to use.
+3.4 server.js
+This is the main file of the project.
+It does the following:
+Creates the server using Express
+Connects to the MySQL database
+Handles all API routes
+Starts the server on port 3000
+
+7. API Endpoints Explanation
+4.1 Students
+POST /students
+Used to add a new student
+Takes name and email from the request body
+Saves the student in the database
+GET /students
+Used to get all students
+Returns a list of students in JSON format
+4.2 Courses
+POST /courses
+Used to add a new course
+Takes course name from the request body
+GET /courses
+Used to get all courses
+Returns all courses from the database
+4.3 Enrollments
+POST /enrollments
+Used to enroll a student in a course
+Takes student ID and course ID
+Saves the enrollment date automatically
+GET /enrollments
+Shows all enrollments
+Displays student name, course name, and enrollment date
+8. How to Run the Project
+Install Node.js
+Create the MySQL database named studentcoursers
+Create tables: students, courses, and enrollments
+Open the project folder in terminal
+Run this command:
+npm install
+Start the server using:
+npm start
+The server will run on port 3000
+
+10. Conclusion
+This project helped me understand:
+How to create a backend server
+How to connect Node.js with MySQL
+How APIs work using GET and POST methods
+It is a simple project but very useful for learning backend development.
 
 
-1. How the Backend System Works
-The backend system is built using Node.js and Express.
-Express is used to create a server that exposes API endpoints for managing students, courses, and enrollments.
-•	The server listens for HTTP requests (GET and POST).
-•	Each request is handled by an API endpoint defined in server.js.
-•	The backend connects to a MySQL database to store and retrieve data.
-•	Responses are sent back to the client in JSON format.
-The system handles:
-•	Student registration
-•	Course creation
-•	Student enrollment into courses
-•	Viewing stored data
+Done by Huguette Manzi Keza
+From L4SWDA
 
-
-
-
-
-Keys Definition
-Primary Keys
-•	student_id → Students
-•	course_id → Courses
-•	enrollment_id → Enrollments
-Foreign Keys
-•	student_id in Enrollments → references Students(student_id)
-•	course_id in Enrollments → references Courses(course_id)
-
-
-
-
-
-
-2. Data Flow (Client → Server → Database)
-1.	The client (Postman or browser) sends an HTTP request (for example, POST /students).
-2.	The server (Express) receives the request and reads the JSON data.
-3.	The server processes the request and sends an SQL query to the MySQL database.
-4.	The database stores or retrieves the requested data.
-5.	The server sends a JSON response back to the client showing success or the requested data.
-Example:
-A student is registered → client sends student details → server inserts data into the Students table → server returns confirmation.
-
-3. Challenges Faced and Solutions
-Challenge	Solution
-No database selected error	Used USE database_name; before creating tables
-Database already existed	Created a new database with a different name
-Connecting backend to MySQL	Used the mysql2 library and tested the connection
-Managing student–course relationship	Created an Enrollments table with foreign keys
